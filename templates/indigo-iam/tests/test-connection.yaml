@@ -11,5 +11,5 @@ spec:
     - name: wget
       image: busybox
       command: ['wget']
-      args: ['{{ include "indigo-iam.fullname" . }}:{{ .Values.service.port }}']
+      args: ['{{ include "indigo-iam.fullname" . }}:{{ .Values.indigoIam.service.port }}']
   restartPolicy: Never
