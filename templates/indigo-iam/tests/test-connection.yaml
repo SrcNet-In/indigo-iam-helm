@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ include "indigo-iam.fullname" . }}-test-connection"
+  labels:
+    {{- include "indigo-iam.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['{{ include "indigo-iam.fullname" . }}:{{ .Values.service.port }}']
+  restartPolicy: Never

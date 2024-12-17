@@ -1,0 +1,24 @@
+{{- if .Values.indigoIam.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-iam
+spec:
+  replicas: {{ .Values.indigoIam.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-iam
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-iam
+    spec:
+      serviceAccountName: {{ .Values.indigoIam.serviceAccount.name | default (include "indigo-iam.fullname" .) }}
+      containers:
+        - name: iam
+          image: "{{ .Values.indigoIam.image.repository }}:{{ .Values.indigoIam.image.tag }}"
+          ports:
+            - containerPort: 80
+          resources:
+            {{- toYaml .Values.indigoIam.resources | nindent 12 }}
+{{- end }}

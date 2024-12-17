@@ -1,0 +1,15 @@
+{{- if .Values.indigoIam.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-iam
+spec:
+  type: {{ .Values.indigoIam.service.type }}
+  ports:
+    - port: {{ .Values.indigoIam.service.port }}
+      targetPort: 80
+      protocol: TCP
+      name: http
+  selector:
+    app: {{ .Release.Name }}-iam
+{{- end}}
