@@ -40,8 +40,19 @@ indigoIam:
       memory: "128Mi"
   expose:
     enabled: false
+  db:
+    host: "indigo-iam-mysql"
+    username: "indigo-iam"
+    password: "password"
   labels: {}
   serviceAccount:
     create: true
     name: my-service-account
-    annotations: {  }
+    annotations: { }
+
+mysql:
+  auth:
+    rootPassword: root
+    password: password
+    database: indigoiam
+    username: indigoiam

@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: iam-config
+data:
+  IAM_DB_HOST: "{{ .Values.indigoIam.db.host }}"
+  IAM_DB_USERNAME: "{{ .Values.indigoIam.db.username }}"
+  IAM_DB_PASSWORD: "{{ .Values.indigoIam.db.password }}"

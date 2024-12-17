@@ -21,4 +21,7 @@ spec:
             - containerPort: 80
           resources:
             {{- toYaml .Values.indigoIam.resources | nindent 12 }}
+          envFrom:
+            - configMapRef:
+                name: iam-config
 {{- end }}
