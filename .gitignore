@@ -1,3 +1,7 @@
 .idea
 charts
 Chart.lock
+
+static/indigo-iam/keystore.jwks
+
+temp.yaml
