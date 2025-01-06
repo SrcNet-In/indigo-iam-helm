@@ -7,7 +7,7 @@ spec:
   type: {{ .Values.indigoIam.service.type }}
   ports:
     - port: {{ .Values.indigoIam.service.port }}
-      targetPort: 80
+      targetPort: {{ .Values.indigoIam.port }}
       protocol: TCP
       name: http
   selector:

@@ -1,3 +1,4 @@
+{{- if and .Values.indigoIam.enabled .Values.indigoIam.expose.enabled -}}
 apiVersion: networking.x-k8s.io/v1alpha1
 kind: Gateway
 metadata:
@@ -10,3 +11,4 @@ spec:
       allowedRoutes:
         namespaces:
           from: All
+{{- end -}}

@@ -1,3 +1,4 @@
+{{- if and .Values.indigoIam.enabled .Values.indigoIam.expose.enabled -}}
 apiVersion: networking.x-k8s.io/v1alpha1
 kind: HTTPRoute
 metadata:
@@ -8,10 +9,11 @@ spec:
   hostnames:
     iamHost: "iam.local.io"
   rules:
-    - matches:
-        - path:
-            type: Prefix
-            value: /
-      forwardTo:
-        - serviceName: iam
-          port: 8080
+  - matches:
+    - path:
+        type: Prefix
+        value: /
+    forwardTo:
+    - serviceName: iam
+      port: 8080
+{{- end -}}

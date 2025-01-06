@@ -13,15 +13,17 @@ spec:
       labels:
         app: {{ .Release.Name }}-iam
     spec:
-      serviceAccountName: {{ .Values.indigoIam.serviceAccount.name | default (include "indigo-iam.fullname" .) }}
+      {{- if .Values.indigoIam.serviceAccount.enable -}}
+      serviceAccountName: {{ .Values.indigoIam.serviceAccount.name  }}
+      {{- end }}
       containers:
-        - name: iam
-          image: "{{ .Values.indigoIam.image.repository }}:{{ .Values.indigoIam.image.tag }}"
-          ports:
-            - containerPort: 80
-          resources:
-            {{- toYaml .Values.indigoIam.resources | nindent 12 }}
-          envFrom:
-            - configMapRef:
-                name: iam-config
+      - name: iam
+        image: "{{ .Values.indigoIam.image.repository }}:{{ .Values.indigoIam.image.tag }}"
+        ports:
+        - containerPort: {{ .Values.indigoIam.port }}
+        resources:
+          {{- toYaml .Values.indigoIam.resources | nindent 12 }}
+        envFrom:
+        - configMapRef:
+            name: iam-config
 {{- end }}

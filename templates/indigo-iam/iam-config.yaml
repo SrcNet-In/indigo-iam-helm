@@ -3,6 +3,17 @@ kind: ConfigMap
 metadata:
   name: iam-config
 data:
-  IAM_DB_HOST: "{{ .Values.indigoIam.db.host }}"
-  IAM_DB_USERNAME: "{{ .Values.indigoIam.db.username }}"
-  IAM_DB_PASSWORD: "{{ .Values.indigoIam.db.password }}"
+  IAM_PORT: "{{ .Values.indigoIam.port }}"
+  IAM_DB_HOST: {{ .Values.indigoIam.db.host }}
+  IAM_DB_PORT:  "{{ .Values.indigoIam.db.port }}"
+  IAM_DB_NAME:  {{ .Values.indigoIam.db.name }}
+  IAM_DB_USERNAME: {{ .Values.indigoIam.db.username }}
+  IAM_DB_PASSWORD: {{ .Values.indigoIam.db.password }}
+  IAM_JAVA_OPTS: -Dspring.profiles.active=prod,registration,oidc,saml jdbc:mysql://${IAM_DB_HOST}:${IAM_DB_PORT:3306}/${IAM_DB_NAME:iam}?allowPublicKeyRetrieval=true&useSSL=false} -Djava.security.egd=file:/dev/./urandom
+  IAM_HOST: dev.iam.io
+  IAM_BASE_URL: https://dev.iam.io:8443
+  IAM_ISSUER: https://dev.iam.io:8443
+  IAM_FORWARD_HEADERS_STRATEGY: native
+  IAM_KEY_STORE_LOCATION: file:/keystore/keystore.jwks
+  IAM_X509_CAN_LOGIN: "true"
+  IAM_LOG_LEVEL: DEBUG
