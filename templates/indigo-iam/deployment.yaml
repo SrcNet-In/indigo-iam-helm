@@ -13,7 +13,7 @@ spec:
       labels:
         app: {{ .Release.Name }}-iam
     spec:
-      {{- if .Values.indigoIam.serviceAccount.enable -}}
+      {{- if .Values.indigoIam.serviceAccount.enabled -}}
       serviceAccountName: {{ .Values.indigoIam.serviceAccount.name  }}
       {{- end }}
       containers:
